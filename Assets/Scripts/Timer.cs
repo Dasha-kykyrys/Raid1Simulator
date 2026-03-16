@@ -29,7 +29,6 @@ public class Timer : MonoBehaviour
     }
     private void UpdateText()
     {
-        Debug.Log(currTime);
         timerText.text = currTime.ToString();
     }
 }

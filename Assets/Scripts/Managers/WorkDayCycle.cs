@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using Yarn.Unity;
 
 public class WorkDayCycle : MonoBehaviour
 {
     public static WorkDayCycle instance;
     [SerializeField] private GameObject[] Clients;
-    [SerializeField] Days[] days;
     private int currDay = 0;
+    public DialogueRunner dialogueRunner;
     private void Awake()
     {
         instance = this;
@@ -17,21 +18,7 @@ public class WorkDayCycle : MonoBehaviour
     }
     public void StartCycle()
     {
-        if (currDay < days.Length)
-        {
-            Days day = ScriptableObject.CreateInstance<Days>();
-            day = days[currDay];
-
-            foreach (StoryNode node in day.storyPart)
-            {
-                Timer.instance.ChangeTime(node.duration, true);
-            }
-            Timer.instance.ChangeTime(0, false);
-        }
-        else
-        {
-            Debug.Log("Конец демо");
-        }
+        dialogueRunner.StartDialogue("Start");
     }
     private void SpawnClient(GameObject client)
     {
