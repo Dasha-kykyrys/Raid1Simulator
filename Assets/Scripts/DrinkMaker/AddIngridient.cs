@@ -6,7 +6,6 @@ public class AddIngridient : MonoBehaviour
 {
 
     public int count;
-    private bool isAlcohol, isBase = false;
     [SerializeField] Ingredient ingredient;
     private void Start()
     {

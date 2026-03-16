@@ -11,7 +11,6 @@ public class DrinkShaker : MonoBehaviour
     private List<Ingredient> c_alco, c_base, c_ingredient, c_specIngredient;
     private bool isAvailable = false;
     public static DrinkShaker instance;
-    private float sweetness, bitterness, sourness, intoxication;
     private void Start()
     {
         instance = this;
@@ -112,10 +111,6 @@ public class DrinkShaker : MonoBehaviour
         c_base.Clear();
         c_ingredient.Clear();
         c_specIngredient.Clear();
-        sweetness = 0;
-        bitterness = 0;
-        sourness = 0;
-        intoxication = 0;
         isAvailable = false;
     }
 }
