@@ -3,11 +3,12 @@ using UnityEngine;
 public class Ingredient : ScriptableObject
 {
     public string ingredientName;
+    public int ingredientID;
     public int startCount;
     public float sweetness;
     public float bitterness;
     public float sourness;
-    public float intoxication;
+    public float strength;
     public SpecialEffect specialEffect;
     public IngredientType type;
 }

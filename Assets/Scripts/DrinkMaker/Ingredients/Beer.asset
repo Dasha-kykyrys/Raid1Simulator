@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Beer
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Beer
+  ingredientID: 0
   startCount: 5
   sweetness: 0
   bitterness: 3
   sourness: 0
-  intoxication: 5
+  strength: 5
   specialEffect: 0
   type: 1
