@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33d98d701f9e70441a0993a4508b5563, type: 3}
+  m_Name: Mohito
+  m_EditorClassIdentifier: Assembly-CSharp::Drink
+  DrinkName: "\u041C\u043E\u0445\u0438\u0442\u043E"
+  sprite: {fileID: 0}
+  alco:
+  - {fileID: 11400000, guid: 88cf032a516acdb4d98b7055272f7256, type: 2}
+  bases: []
+  ingredients: []
+  specialIngredients: []
+  allIngredients:
+  - {fileID: 11400000, guid: 88cf032a516acdb4d98b7055272f7256, type: 2}
+  Strength: 5
+  Sweetness: 0
+  Sourness: 0
+  Bitterness: 3
+  SpecialEffect: 0

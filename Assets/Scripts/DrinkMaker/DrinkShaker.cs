@@ -1,0 +1,118 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DrinkShaker : MonoBehaviour
+{
+    private const int maxAlcohol = 1;
+    private const int maxBase = 2;
+    private const int maxIngredient = 3;
+    private const int maxSpecialIngredient = 1;
+    private List<Ingredient> c_alco, c_base, c_ingredient, c_specIngredient, c_allingredients;
+    private bool isAvailable = false;
+    public static DrinkShaker instance;
+    private void Start()
+    {
+        instance = this;
+        c_alco = new List<Ingredient>();
+        c_base = new List<Ingredient>();
+        c_ingredient = new List<Ingredient>();
+        c_specIngredient = new List<Ingredient>();
+        c_allingredients = new List<Ingredient>();
+    }
+    public int AddIngredients(Ingredient ingredient, IngredientType type)
+    {
+
+        switch (type)
+        {
+            case IngredientType.Alcohol:
+                if (c_alco.Count >= maxAlcohol)
+                {
+                    Debug.Log("Достигнут максимум алкоголя");
+                    return 0;
+                }
+                c_alco.Add(ingredient);
+                isAvailable = true;
+                break;
+
+            case IngredientType.Base:
+                if (c_base.Count >= maxBase)
+                {
+                    Debug.Log("Достигнут максимум базы");
+                    return 0;
+                }
+                c_base.Add(ingredient);
+                isAvailable = true;
+                break;
+
+            case IngredientType.Ingredient:
+                if (c_ingredient.Count >= maxIngredient)
+                {
+                    Debug.Log("Достигнут максимум ингредиентов");
+                    return 0;
+                }
+                c_ingredient.Add(ingredient);
+                isAvailable = false;
+                break;
+
+            case IngredientType.SpecialIngredient:
+                if (c_specIngredient.Count >= maxSpecialIngredient)
+                {
+                    Debug.Log("Достигнут максимум спецмального ингредиента");
+                    return 0;
+                }
+                c_specIngredient.Add(ingredient);
+                isAvailable = false;
+                break;
+
+            default:
+                Debug.Log("Неизвестный тип ингредиента");
+                return 0;
+        }
+        return 1;
+    }
+    public void MakeCoctail()
+    {
+        if (isAvailable)
+        {
+            Drink drink = ScriptableObject.CreateInstance<Drink>();
+            drink.allIngredients = new List<Ingredient>();
+            drink.allIngredients.AddRange(c_alco);
+            drink.allIngredients.AddRange(c_base);
+            drink.allIngredients.AddRange(c_specIngredient);
+            drink.allIngredients.AddRange(c_ingredient);
+            drink.alco = new List<Ingredient>(c_alco);
+            drink.bases = new List<Ingredient>(c_base);
+            drink.ingredients = new List<Ingredient>(c_ingredient);
+            drink.specialIngredients = new List<Ingredient>(c_specIngredient);
+            drink.RecalculateStats();
+
+            Drink detectedDrink = DrinksDetector.Instance.FindDrink(drink);
+
+            if (detectedDrink != null)
+            {
+                drink = detectedDrink;
+                Debug.Log($"{drink.DrinkName} {drink.Sourness} {drink.Sweetness} {drink.Bitterness} {drink.Strength}");
+            }
+            else
+            {
+                drink.DrinkName = "Авторский";
+                Debug.Log($"{drink.DrinkName} {drink.Sourness} {drink.Sweetness} {drink.Bitterness} {drink.Strength}");
+            }
+            ChangeView.instance.MoveCameraToBar();
+            WorkDayCycle.instance.StartReactDialogue(drink);
+            ResetShaker();
+        }
+        else
+        {
+            Debug.Log("Добавьте основу или алкоголь");
+        }
+    }
+    public void ResetShaker()
+    {
+        c_alco.Clear();
+        c_base.Clear();
+        c_ingredient.Clear();
+        c_specIngredient.Clear();
+        isAvailable = false;
+    }
+}

@@ -1,0 +1,26 @@
+﻿title: r1_greet
+---
+<<declare $dialogueInd = random_range(1,3)>>
+
+Клиент: Слышь, налей ка мне чего-нибудь
+Клиент: Дай ка подумать. {setPref($dialogueInd)}
+-> Владелец: Неа
+	Клиент: Ну и ладна
+-> Владелец: Ладно 
+	<<makeCocktail Managers>>
+===
+title: r1_badreact
+---
+Клиент: говно
+<<nextClient Managers>>
+===
+title: r1_normalreact
+---
+Клиент: норм
+<<nextClient Managers>>
+===
+title: r1_goodreact
+---
+Клиент: Кайф
+<<nextClient Managers>>
+===
